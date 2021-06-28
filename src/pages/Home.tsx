@@ -14,7 +14,7 @@ import { database } from '../services/firebase'
 
 export function Home() {
     const history = useHistory()
-    const { user, signInWithGoogle } = useAuth()
+    const { user, signInWithGoogle  } = useAuth()
     const [roomCode, setRoomCode] = useState('')
 
     async function handleCreateRoom() {
@@ -28,6 +28,10 @@ export function Home() {
     async function handleJoinRoom(event: FormEvent) {
         event.preventDefault();
 
+        if (!user) {
+            await signInWithGoogle()
+        }
+        
         if(roomCode.trim() === ''){
             return;
         }

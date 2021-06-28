@@ -11,12 +11,15 @@ import { useRoom } from "../hooks/useRoom";
 
 import "../styles/room.scss";
 import { database } from "../services/firebase";
+import { Perfil } from "../components/Perfil";
+import { useAuth } from "../hooks/useAuth";
 
 type RoomParams = {
   id: string;
 };
 
 export function AdminRoom() {
+  const { user } = useAuth();
   const history = useHistory();
   const params = useParams<RoomParams>();
   const roomId = params.id;
@@ -60,6 +63,7 @@ export function AdminRoom() {
             <Button isOutline onClick={handleEndRoom}>
               Encerrar Sala
             </Button>
+            <Perfil namePerfil={user?.name} avatarURLPerfil={user?.avatarURL} />
           </div>
         </div>
       </header>

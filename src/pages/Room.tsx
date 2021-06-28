@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import logoImg from "../assets/images/logo.svg";
 import { Button } from "../components/Button";
+import { Perfil } from "../components/Perfil";
 import { Question } from "../components/Question";
 import { RoomCode } from "../components/RoomCode";
 import { useAuth } from "../hooks/useAuth";
@@ -21,16 +22,19 @@ export function Room() {
 
   const [newQuestion, setNewQuestion] = useState("");
 
-  async function handleLikeQuestion(questionId: string, likeId:string | undefined) {
-
-    if(likeId) {
-      await database.ref(`rooms/${roomId}/question/${questionId}/likes/${likeId}`).remove();
-    }else{
+  async function handleLikeQuestion(
+    questionId: string,
+    likeId: string | undefined
+  ) {
+    if (likeId) {
+      await database
+        .ref(`rooms/${roomId}/question/${questionId}/likes/${likeId}`)
+        .remove();
+    } else {
       await database.ref(`rooms/${roomId}/question/${questionId}/likes`).push({
         authorId: user?.id,
       });
     }
-
   }
 
   async function handleSendQuestion(event: FormEvent) {
@@ -65,6 +69,7 @@ export function Room() {
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
           <RoomCode code={roomId} />
+          <Perfil namePerfil={user?.name} avatarURLPerfil={user?.avatarURL} />
         </div>
       </header>
 
@@ -115,7 +120,9 @@ export function Room() {
                   className={`like-button ${question.likeId ? "liked" : ""}`}
                   type="button"
                   aria-label="Marcar como gostei"
-                  onClick={() => handleLikeQuestion(question.id, question.likeId)}
+                  onClick={() =>
+                    handleLikeQuestion(question.id, question.likeId)
+                  }
                 >
                   {question.likeCount > 0 && <span>{question.likeCount}</span>}
                   <svg

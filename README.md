@@ -41,4 +41,4 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](.github/LICENSE.
 
 ---
 
-Projeto Feito no NLW-06 da Rocketseat:wave: [Participe da nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+Projeto Feito no NLW-06 da Rocketseat:wave: [Participe da comunidade deles](https://discordapp.com/invite/gCRAFhc)
